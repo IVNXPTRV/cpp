@@ -1,0 +1,45 @@
+{
+  description = "A development shell for C++ projects";
+
+  inputs = {
+    # Specify the version of the Nixpkgs repository to use for dependencies
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11"; # Use a stable branch
+  };
+
+  outputs = { self, nixpkgs, ... }:
+    let
+      # Define the system architecture (e.g., "x86_64-linux")
+      system = "x86_64-linux";
+      
+      # Import the nixpkgs library for the specified system
+      pkgs = import nixpkgs {
+        inherit system;
+      };
+
+    in {
+      # This is the crucial part: defining the development shell
+      devShells.${system}.default = pkgs.mkShell {
+        # Define the dependencies available in the shell's PATH
+        # Add any C++-related packages you need here
+        packages = with pkgs; [
+          # The C/C++ compiler suite (GCC or clang)
+          gcc
+          
+          # The build system generator (essential for most C++ projects)
+          cmake
+          
+          # Debugger
+          gdb
+          
+          # Version control
+          git
+        ];
+
+        # Set environment variables if needed (e.g., for specific library paths)
+        # shellHook = ''
+        #   echo "Entering C++ development environment..."
+        # '';
+
+      };
+    };
+}
