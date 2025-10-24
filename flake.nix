@@ -4,9 +4,10 @@
   inputs = {
     # Specify the version of the Nixpkgs repository to use for dependencies
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11"; # Use a stable branch
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self, nixpkgs, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, ... }:
     let
       # Define the system architecture (e.g., "x86_64-linux")
       system = "x86_64-linux";
@@ -15,7 +16,7 @@
       pkgs = import nixpkgs {
         inherit system;
       };
-
+      unstable-pkgs = import nixpkgs-unstable { inherit system; };
     in {
       # This is the crucial part: defining the development shell
       devShells.${system}.default = pkgs.mkShell {
@@ -30,9 +31,14 @@
           
           # Debugger
           gdb
+
+          # Formatters
+          clang-tools
+          unstable-pkgs.mbake
           
           # Version control
           git
+
         ];
 
         # Set environment variables if needed (e.g., for specific library paths)

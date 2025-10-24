@@ -1,21 +1,20 @@
 
-CXX					:=	c++
-CXXFLAGS			:=	-Wall -Wextra -Werror -std=c++98
-RM					:=	rm -rf
+CXX := c++
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98
+RM := rm -rf
 
-NAME				:=	megaphone
+NAME := megaphone
 
-INCLUDE_DIRS		:= \
+INCLUDE_DIRS := \
 						./
 
-INCLUDE				:=	$(addprefix -I,$(INCLUDE_DIRS))
+INCLUDE := $(addprefix -I,$(INCLUDE_DIRS))
 
-SRC					:= \
+SRC := \
 					./src/megaphone.cpp
 
-OBJ					:=	$(patsubst ./src/%.cpp,./obj/%.o,$(SRC))
-DEP					:=	$(patsubst ./src/%.cpp,./dep/%.d,$(SRC))
-
+OBJ := $(patsubst ./src/%.cpp,./obj/%.o,$(SRC))
+DEP := $(patsubst ./src/%.cpp,./dep/%.d,$(SRC))
 
 all: $(NAME)
 
@@ -47,15 +46,15 @@ test:
 	@echo "SHHHHH... I THINK THE STUDENTS ARE ASLEEP..."
 	@echo "result: -----------------------------------"
 	@./megaphone "shhhhh... I think the students are asleep..."
-	@echo 
+	@echo
 	@echo "expect: -----------------------------------"
 	@echo "DAMNIT  !  SORRY STUDENTS, I THOUGHT THIS THING WAS OFF."
 	@echo "result: -----------------------------------"
 	@./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
-	@echo 
+	@echo
 	@echo "expect: -----------------------------------"
 	@echo "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
 	@echo "result: -----------------------------------"
 	@./megaphone
 
--include $(DEP)
+	-include $(DEP)
