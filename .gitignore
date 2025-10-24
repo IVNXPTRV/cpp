@@ -1,0 +1,16 @@
+.DS_Store
+.idea
+*.log
+tmp/
+
+**/dep/
+**/obj/
+
+# Object files and build artifacts
+*.o
+*.d
+*.a
+*.gch
+
+# Debug & logs
+*.lldb

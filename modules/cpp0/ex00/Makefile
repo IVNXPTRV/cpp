@@ -1,26 +1,46 @@
-SRCS = megaphone.cpp
 
-OBJS = $(SRCS:.cpp=.o)
-NAME = megaphone
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-CXX = c++
-RM = rm -f
+CXX					:=	c++
+CXXFLAGS			:=	-Wall -Wextra -Werror -std=c++98
+RM					:=	rm -rf
+
+NAME				:=	megaphone
+
+INCLUDE_DIRS		:= \
+						./
+
+INCLUDE				:=	$(addprefix -I,$(INCLUDE_DIRS))
+
+SRC					:= \
+					./src/megaphone.cpp
+
+OBJ					:=	$(patsubst ./src/%.cpp,./obj/%.o,$(SRC))
+DEP					:=	$(patsubst ./src/%.cpp,./dep/%.d,$(SRC))
+
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
+$(NAME): $(OBJ) Makefile
+	$(CXX) $(OBJ) -o $@
 
-%.o: %.c
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+./obj/%.o: ./src/%.cpp | obj_dir dep_dir
+	mkdir -p $(dir $@) ./dep/$(dir $(@:obj/%.o=%))
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@ -MMD -MF $(patsubst ./obj/%.o,./dep/%.d,$@)
+
+obj_dir:
+	@mkdir -p obj
+
+dep_dir:
+	@mkdir -p dep
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) obj
+	$(RM) dep
+	$(RM) $(OBJ)
 
 fclean: clean
 	$(RM) $(NAME)
 
-re: fclean all
+re: clean fclean all obj_dir dep_dir
 
 test:
 	@echo "expect: -----------------------------------"
@@ -37,3 +57,5 @@ test:
 	@echo "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
 	@echo "result: -----------------------------------"
 	@./megaphone
+
+-include $(DEP)
