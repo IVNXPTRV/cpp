@@ -1,9 +1,10 @@
 
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98
+CXXFLAGS := -std=c++98
+# CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 RM := rm -rf
 
-NAME := megaphone
+NAME := playground
 
 INCLUDE_DIRS := \
 						./
@@ -11,7 +12,7 @@ INCLUDE_DIRS := \
 INCLUDE := $(addprefix -I,$(INCLUDE_DIRS))
 
 SRC := \
-					./src/megaphone.cpp
+					./src/playground.cpp
 
 OBJ := $(patsubst ./src/%.cpp,./obj/%.o,$(SRC))
 DEP := $(patsubst ./src/%.cpp,./dep/%.d,$(SRC))
@@ -39,7 +40,7 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-re: clean fclean all
+re: clean fclean all obj_dir dep_dir
 
 test:
 	@echo "expect: -----------------------------------"
@@ -57,4 +58,4 @@ test:
 	@echo "result: -----------------------------------"
 	@./megaphone
 
--include $(DEP)
+	-include $(DEP)

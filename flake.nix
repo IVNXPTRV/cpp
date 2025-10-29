@@ -8,44 +8,46 @@
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, ... }:
-    let
-      # Define the system architecture (e.g., "x86_64-linux")
-      system = "x86_64-linux";
-      
-      # Import the nixpkgs library for the specified system
-      pkgs = import nixpkgs {
-        inherit system;
-      };
-      unstable-pkgs = import nixpkgs-unstable { inherit system; };
-    in {
-      # This is the crucial part: defining the development shell
-      devShells.${system}.default = pkgs.mkShell {
-        # Define the dependencies available in the shell's PATH
-        # Add any C++-related packages you need here
-        packages = with pkgs; [
-          # The C/C++ compiler suite (GCC or clang)
-          gcc
-          
-          # The build system generator (essential for most C++ projects)
-          cmake
-          
-          # Debugger
-          gdb
+  let
+    # Define the system architecture (e.g., "x86_64-linux")
+    system = "x86_64-linux";
 
-          # Formatters
-          clang-tools
-          unstable-pkgs.mbake
-          
-          # Version control
-          git
-
-        ];
-
-        # Set environment variables if needed (e.g., for specific library paths)
-        # shellHook = ''
-        #   echo "Entering C++ development environment..."
-        # '';
-
-      };
+    # Import the nixpkgs library for the specified system
+    pkgs = import nixpkgs {
+      inherit system;
     };
+    unstable-pkgs = import nixpkgs-unstable { inherit system; };
+  in {
+    # This is the crucial part: defining the development shell
+    devShells.${system}.default = pkgs.mkShell {
+      # Define the dependencies available in the shell's PATH
+      # Add any C++-related packages you need here
+      packages = with pkgs; [
+        # The C/C++ compiler suite (GCC or clang)
+        gcc
+
+        # The build system generator (essential for most C++ projects)
+        cmake
+
+        # Debugger
+        gdb
+
+        # Formatters
+        clang-tools
+        unstable-pkgs.mbake
+
+        # Version control
+        git
+
+        # compile help
+        bear
+      ];
+
+      # Set environment variables if needed (e.g., for specific library paths)
+      # shellHook = ''
+      #   echo "Entering C++ development environment..."
+      # '';
+
+    };
+  };
 }

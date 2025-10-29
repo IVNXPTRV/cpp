@@ -6,7 +6,7 @@ RM := rm -rf
 NAME := megaphone
 
 INCLUDE_DIRS := \
-						./
+						./includes/
 
 INCLUDE := $(addprefix -I,$(INCLUDE_DIRS))
 
