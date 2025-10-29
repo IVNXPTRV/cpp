@@ -1,5 +1,6 @@
 #include "PhoneBook.hpp"
 
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -15,7 +16,9 @@ std::string PhoneBook::_trimBlank(std::string str) {
 
   start = str.find_first_not_of(blank);
   end = str.find_last_not_of(blank);
-  if (start == std::string::npos) return (std::string());
+  if (start == std::string::npos) {
+    return (std::string());
+  }
   if (start == end) return (str);
   return (str.substr(start, end - start + 1));
 }
@@ -25,7 +28,7 @@ bool PhoneBook::_isValidName(std::string input) {
        ++it) {
     char c = *it;
     if (!std::isalpha(static_cast<unsigned char>(c)) && c != '-' && c != ' ') {
-      std::cout << "Latin latters, '-' and spaces are allowed. Try again."
+      std::cout << "Only latin latters, '-' and spaces are allowed. Try again."
                 << std::endl
                 << "> ";
       return false;
@@ -50,13 +53,14 @@ std::string PhoneBook::_getInput(std::string const prompt,
                                  bool (*isValid)(std::string input)) {
   std::string input;
 
+  if (std::cin.eof()) exit(EXIT_SUCCESS);
   std::cout << "Please enter " << prompt << ":" << std::endl << "> ";
   while (true) {
     input.clear();
     if (!std::getline(std::cin, input)) {
-      std::cin.clear();
+      break;
     }
-    PhoneBook::_trimBlank(input);
+    input = PhoneBook::_trimBlank(input);
     if (input.empty()) {
       std::cout << "Empty input is not allowed. Try again." << std::endl
                 << "> ";
