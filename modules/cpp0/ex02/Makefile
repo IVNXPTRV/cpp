@@ -1,6 +1,6 @@
 
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MF 
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 RM := rm -rf
 
 NAME := phonebook 
@@ -24,7 +24,8 @@ $(NAME): $(OBJ) Makefile
 	$(CXX) $(OBJ) -o $@
 
 ./obj/%.o: ./src/%.cpp | obj_dir dep_dir
-	$(CXX) $(CXXFLAGS) ./dep/$(@:obj/%.o=%.d) $(INCLUDE) -c $< -o $@
+	mkdir -p $(dir $@) ./dep/$(dir $(@:obj/%.o=%))
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@ -MMD -MF $(patsubst ./obj/%.o,./dep/%.d,$@)
 
 obj_dir:
 	@mkdir -p obj
