@@ -8,17 +8,19 @@ class Contact {
   Contact(void);
   ~Contact(void);
 
-  void setFirstName(const std::string &input);
-  void setLastName(const std::string &input);
-  void setNickname(const std::string &input);
-  void setPhoneNumber(const std::string &input);
-  void setDarkestSecret(const std::string &input);
+  void setFirstName(const std::string& input);
+  void setLastName(const std::string& input);
+  void setNickname(const std::string& input);
+  void setPhoneNumber(const std::string& input);
+  void setDarkestSecret(const std::string& input);
 
-  const std::string &getFirstName() const;
-  const std::string &getLastName() const;
-  const std::string &getNickname() const;
-  const std::string &getPhoneNumber() const;
-  const std::string &getSecret() const;
+  const std::string& getFirstName() const;
+  const std::string& getLastName() const;
+  const std::string& getNickname() const;
+  const std::string& getPhoneNumber() const;
+  const std::string& getSecret() const;
+
+  bool isEmpty(void) const;
 
  private:
   std::string _firstName;

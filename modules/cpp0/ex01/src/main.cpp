@@ -44,7 +44,7 @@ void printFarewellMessage(void) {
   return;
 }
 
-int PhoneBook::_count = NO_CONTACTS;
+int PhoneBook::_index = NO_CONTACTS;
 Contact PhoneBook::_contactList[MAX_CONTACTS];
 
 int runPhoneBook(void) {
