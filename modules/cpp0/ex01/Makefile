@@ -3,15 +3,17 @@ CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 RM := rm -rf
 
-NAME := megaphone
+NAME := phonebook 
 
 INCLUDE_DIRS := \
-						./includes/
+						./include/
 
 INCLUDE := $(addprefix -I,$(INCLUDE_DIRS))
 
 SRC := \
-					./src/megaphone.cpp
+					./src/Contact.cpp \
+					./src/PhoneBook.cpp \
+					./src/main.cpp \
 
 OBJ := $(patsubst ./src/%.cpp,./obj/%.o,$(SRC))
 DEP := $(patsubst ./src/%.cpp,./dep/%.d,$(SRC))

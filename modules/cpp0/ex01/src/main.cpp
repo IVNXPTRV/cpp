@@ -1,19 +1,59 @@
+#include <stdlib.h>
 
-#include <cstdlib>
 #include <iostream>
 
-int main(int argc, char **argv) {
-  std::string line;
+#include "PhoneBook.hpp"
 
-  if (argc == 1) {
-    line = "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-    std::cout << line;
+bool getInput(std::string& input) {
+  std::cout << "Type your command: ADD, SEARCH or EXIT." << std::endl << "> ";
+  if (!std::getline(std::cin, input) || input == "EXIT") {
+    return (false);
+  } else
+    return (true);
+}
+
+void parseInput(std::string& input) {
+  if (input == "ADD") {
+    PhoneBook::addContact();
+  } else if (input == "SEARCH") {
+    PhoneBook::searchContact();
+  } else
+    std::cout << "Valid commands: ADD, SEARCH, EXIT. Try again." << std::endl;
+  return;
+}
+
+void runLoop(void) {
+  std::string input;
+
+  while (getInput(input)) {
+    parseInput(input);
   }
-  while (*++argv) {
-    line = *argv;
-    for (size_t i = 0; i < line.length(); i++) line[i] = std::toupper(line[i]);
-    std::cout << line << " ";
-  }
-  std::cout << std::endl;
+
+  return;
+}
+
+void printWelcomeMessage(void) {
+  std::cout << "Welcome to the PhoneBook!" << std::endl;
+
+  return;
+}
+
+void printFarewellMessage(void) {
+  std::cout << "Thank you for using the PhoneBook. Come again soon!"
+            << std::endl;
+  return;
+}
+
+int PhoneBook::_count = NO_CONTACTS;
+Contact PhoneBook::_contactList[MAX_CONTACTS];
+
+int runPhoneBook(void) {
+  PhoneBook phoneBook;
+
+  printWelcomeMessage();
+  runLoop();
+  printFarewellMessage();
   return (EXIT_SUCCESS);
 }
+
+int main(void) { return (runPhoneBook()); }
