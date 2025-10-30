@@ -1,6 +1,6 @@
 
 CXX := c++
-CXXFLAGS := -Wall -Wextra -Werror -std=c++98
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MF 
 RM := rm -rf
 
 NAME := megaphone
@@ -22,8 +22,7 @@ $(NAME): $(OBJ) Makefile
 	$(CXX) $(OBJ) -o $@
 
 ./obj/%.o: ./src/%.cpp | obj_dir dep_dir
-	mkdir -p $(dir $@) ./dep/$(dir $(@:obj/%.o=%))
-	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@ -MMD -MF $(patsubst ./obj/%.o,./dep/%.d,$@)
+	$(CXX) $(CXXFLAGS) ./dep/$(@:obj/%.o=%.d) $(INCLUDE) -c $< -o $@
 
 obj_dir:
 	@mkdir -p obj
