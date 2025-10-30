@@ -1,57 +1,23 @@
 
-#include <ios>
-#include <vector>
-#include <iostream>
 #include <stdlib.h>
 
-class Animal{
-    public:
-    static int s_x;
-  Animal(void);
-  ~Animal(void);
-    void say(void) const;
-    int y;
-   private:
-        int x;
-};
+#include <ctime>
+#include <iomanip>
+#include <ios>
+#include <iostream>
+#include <vector>
 
-void Animal::say(void) const
-{
-  std::cout << "whroom";
-  return;
-}
-
-Animal::Animal()
-{
-  std::cout << "hello";
-}
-
-Animal::~Animal()
-{
-  std::cout << "bye";
-}
-
-int Animal::s_x = 2;
 int main(void) {
-  // Animal x;
-  std::cout << Animal::s_x;
-// Try to access an element that does not exist (throws an error message)
-  try{
-  }
-  catch (...)
-    {
-      std::cout << "helllll";
-    }
-  //   *   // struct itgr i; 
-  //   std::string line = "world";
-  // char str[10];
-  // line.append("a");
-  //   // std::cin >> line; 
-  //   // std::cout << line;
-  //   // std::cout << &i << std::endl;
-  //   // std::cout << &(i.x) << std::endl;
-  // std::getline(std::cin, line);
-  //   std::cout << line + "H" + "E" + "L" << std::endl;
-  //   std::cout << str << std::endl;
+  std::time_t time;
+  std::tm *timemark;
+
+  time = std::time(NULL);
+  timemark = std::localtime(&time);
+  std::cout << "[" << timemark->tm_year + 1900;
+  std::cout << std::setfill('0') << std::setw(2) << timemark->tm_mon + 1;
+  std::cout << std::setfill('0') << std::setw(2) << timemark->tm_mday << "_";
+  std::cout << std::setfill('0') << std::setw(2) << timemark->tm_hour;
+  std::cout << std::setfill('0') << std::setw(2) << timemark->tm_min;
+  std::cout << std::setfill('0') << std::setw(2) << timemark->tm_sec << "] ";
   return (EXIT_SUCCESS);
 }

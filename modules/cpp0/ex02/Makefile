@@ -3,7 +3,7 @@ CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 RM := rm -rf
 
-NAME := phonebook 
+NAME := account 
 
 INCLUDE_DIRS := \
 						./include/
@@ -11,9 +11,8 @@ INCLUDE_DIRS := \
 INCLUDE := $(addprefix -I,$(INCLUDE_DIRS))
 
 SRC := \
-					./src/Contact.cpp \
-					./src/PhoneBook.cpp \
-					./src/main.cpp \
+					./src/Account.cpp \
+					./src/tests.cpp \
 
 OBJ := $(patsubst ./src/%.cpp,./obj/%.o,$(SRC))
 DEP := $(patsubst ./src/%.cpp,./dep/%.d,$(SRC))
