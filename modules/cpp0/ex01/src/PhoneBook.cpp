@@ -5,10 +5,7 @@
 #include <iostream>
 #include <sstream>
 
-PhoneBook::PhoneBook(void) {
-  PhoneBook::_index = 0;
-  return;
-}
+PhoneBook::PhoneBook(void) {}
 
 PhoneBook::~PhoneBook(void) { return; }
 
