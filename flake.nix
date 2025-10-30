@@ -41,6 +41,9 @@
 
         # compile help
         bear
+        
+        # LLM
+        unstable-pkgs.gemini-cli
       ];
 
       # Set environment variables if needed (e.g., for specific library paths)
