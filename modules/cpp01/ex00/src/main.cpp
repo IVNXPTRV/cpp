@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
   std::string stackZombie;
   std::string heapZombie;
 
-  if (argc < 3) {
+  if (argc != 3) {
     std::cout << "hint: ./zombie stackRandomChumpName heapNewZombieName"
               << std::endl;
     return EXIT_FAILURE;

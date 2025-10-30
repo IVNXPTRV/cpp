@@ -11,14 +11,17 @@ bool stoi(std::string str, int &size) {
 }
 
 int main(int argc, char *argv[]) {
-  int hordeSize;
-  Zombie *horde;
+  int hordeSize = 0;
+  Zombie *horde = NULL;
 
-  if (argc < 3 || !stoi(argv[1], hordeSize)) {
-    std::cout << "hint: ./zombie hordeSize nameOfZombie" << std::endl;
+  if (argc != 3 || !stoi(argv[1], hordeSize) || hordeSize <= 0) {
+    std::cout << "hint: ./zombie 'hordeSize > 0' 'nameOfZombie'" << std::endl;
     return EXIT_FAILURE;
   }
   horde = zombieHorde(hordeSize, argv[2]);
+  for (int i = 0; i < hordeSize; i++) {
+    horde[i].announce();
+  }
   delete[] horde;
   return EXIT_SUCCESS;
 }
