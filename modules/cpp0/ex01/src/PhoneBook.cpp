@@ -5,9 +5,12 @@
 #include <iostream>
 #include <sstream>
 
-PhoneBook::PhoneBook() { return; }
+PhoneBook::PhoneBook(void) {
+  PhoneBook::_index = 0;
+  return;
+}
 
-PhoneBook::~PhoneBook() { return; }
+PhoneBook::~PhoneBook(void) { return; }
 
 std::string PhoneBook::_trimBlank(std::string str) {
   std::string blank = " \t\n\r\v\f";

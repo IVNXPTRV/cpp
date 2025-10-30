@@ -1,5 +1,4 @@
-#include <stdlib.h>
-
+#include <cstdlib>
 #include <iostream>
 
 #include "PhoneBook.hpp"
@@ -19,7 +18,6 @@ void parseInput(std::string& input) {
     PhoneBook::searchContact();
   } else
     std::cout << "Valid commands: ADD, SEARCH, EXIT. Try again." << std::endl;
-  return;
 }
 
 void runLoop(void) {
@@ -28,20 +26,15 @@ void runLoop(void) {
   while (getInput(input)) {
     parseInput(input);
   }
-
-  return;
 }
 
 void printWelcomeMessage(void) {
   std::cout << "Welcome to the PhoneBook!" << std::endl;
-
-  return;
 }
 
 void printFarewellMessage(void) {
   std::cout << "Thank you for using the PhoneBook. Come again soon!"
             << std::endl;
-  return;
 }
 
 int PhoneBook::_index = NO_CONTACTS;
