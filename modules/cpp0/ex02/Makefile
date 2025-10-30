@@ -35,15 +35,10 @@ dep_dir:
 clean:
 	$(RM) obj
 	$(RM) dep
-	$(RM) $(OBJ)
 
 fclean: clean
 	$(RM) $(NAME)
 
-re: clean fclean all
-
-test:
-	@echo "ADD
-	" | ./phonebook
+re: fclean all
 
 -include $(DEP)
