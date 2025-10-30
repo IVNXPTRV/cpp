@@ -3,7 +3,7 @@ CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MF 
 RM := rm -rf
 
-NAME := brain 
+NAME := human 
 
 INCLUDE_DIRS := \
 						./include/
@@ -12,6 +12,9 @@ INCLUDE := $(addprefix -I,$(INCLUDE_DIRS))
 
 SRC := \
 					./src/main.cpp \
+					./src/HumanA.cpp \
+					./src/HumanB.cpp \
+					./src/Weapon.cpp \
 
 OBJ := $(patsubst ./src/%.cpp,./obj/%.o,$(SRC))
 DEP := $(patsubst ./src/%.cpp,./dep/%.d,$(SRC))
@@ -42,6 +45,6 @@ re: fclean all
 test: leaks
 
 leaks:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) 
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
 
 -include $(DEP)
