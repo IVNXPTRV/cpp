@@ -25,6 +25,7 @@
       packages = with pkgs; [
         # The C/C++ compiler suite (GCC or clang)
         gcc
+        valgrind
 
         # The build system generator (essential for most C++ projects)
         cmake
@@ -41,6 +42,7 @@
 
         # compile help
         bear
+        tree
         
         # LLM
         unstable-pkgs.gemini-cli
