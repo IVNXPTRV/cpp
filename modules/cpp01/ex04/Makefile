@@ -42,6 +42,6 @@ re: fclean all
 test: leaks
 
 leaks:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes ./$(NAME) ./test.txt cat dog
 
 -include $(DEP)
