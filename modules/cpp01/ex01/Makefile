@@ -44,6 +44,6 @@ re: fclean all
 test: leaks
 
 leaks:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) 11 Name
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) 11 FooName
 
 -include $(DEP)

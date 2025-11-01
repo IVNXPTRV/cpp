@@ -44,4 +44,16 @@ test: leaks
 leaks:
 	valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes ./$(NAME) ./test.txt cat dog
 
+files:
+	echo 'hello cat hello' > test.txt
+	echo 'hello cat hello' > nowriteperm.txt
+	touch emptyfile.txt
+	echo 'hello cat hello' > noreadperm.txt
+	touch nowriteperm.txt.replace
+	chmod -r noreadperm.txt
+	chmod -w nowriteperm.txt.replace
+
+delFiles:
+	rm -f test.txt test.txt.replace nowriteperm.txt emptyfile.txt emptyfile.txt.replace noreadperm.txt nowriteperm.txt.replace
+
 -include $(DEP)
