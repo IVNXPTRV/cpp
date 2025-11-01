@@ -1,6 +1,6 @@
 #include "HumanA.hpp"
 
-HumanA::HumanA() {}
+#include <iostream>
 
 HumanA::~HumanA() {}
 
