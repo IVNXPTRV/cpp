@@ -1,6 +1,13 @@
 #include "Point.hpp"
 
 bool inSegment(const Point p1, const Point p2, const Point p) {
+  // If the line is vertical, check if the point 'p' is on the same vertical
+  // line and if its y-coordinate is between the y-coordinates of p1 and p2.
+  if (p1.getX() == p2.getX()) {
+    return p.getX() == p1.getX() &&
+           ((p.getY() >= p1.getY() && p.getY() <= p2.getY()) ||
+            (p.getY() >= p2.getY() && p.getY() <= p1.getY()));
+  }
   Fixed m((p1.getY() - p2.getY()) / (p1.getX() - p2.getX()));
   Fixed b(p1.getY() - m * p1.getX());
 
@@ -32,6 +39,5 @@ bool bsp(Point const a, Point const b, Point const c, Point const point) {
   float areaBCP = area(b, c, point);
   float areaCAP = area(c, a, point);
   float areaABC = area(a, b, c);
-
-  return areaABC == (areaABP + areaBCP + areaCAP);
+  return abs(areaABC - (areaABP + areaBCP + areaCAP)) < 0.0001f;
 }

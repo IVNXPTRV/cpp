@@ -60,19 +60,33 @@ bool Fixed::operator!=(const Fixed& other) const {
 }
 
 Fixed Fixed::operator+(const Fixed& other) {
-  return Fixed(this->toFloat() + other.toFloat());
+  Fixed result;
+  result.setRawBits(this->getRawBits() + other.getRawBits());
+  return result;
 }
 
 Fixed Fixed::operator-(const Fixed& other) {
-  return Fixed(this->toFloat() - other.toFloat());
+  Fixed result;
+  result.setRawBits(this->getRawBits() - other.getRawBits());
+  return result;
 }
 
 Fixed Fixed::operator*(const Fixed& other) {
-  return Fixed(this->toFloat() * other.toFloat());
+  Fixed result;
+  long long tmp =
+      static_cast<long long>(this->getRawBits()) * other.getRawBits();
+  result.setRawBits(static_cast<int>(tmp >> Fixed::_fractionalBits));
+  return result;
 }
 
 Fixed Fixed::operator/(const Fixed& other) {
-  return Fixed(this->toFloat() / other.toFloat());
+  if (other.getRawBits() == 0) return (Fixed(0));
+  Fixed result;
+  long long tmp =
+      (static_cast<long long>(this->getRawBits()) << Fixed::_fractionalBits) /
+      other.getRawBits();
+  result.setRawBits(static_cast<int>(tmp));
+  return result;
 }
 
 Fixed Fixed::operator++(void) {
