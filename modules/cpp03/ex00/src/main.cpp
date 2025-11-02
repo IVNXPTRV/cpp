@@ -30,5 +30,20 @@ int main() {
   trap1.attack(trap1.getName());
   std::cout << trap1 << std::endl;
   std::cout << trap0 << std::endl;
+  trap0.takeDamage(10000);
+  std::cout << trap0 << std::endl;
+  trap0.takeDamage(101111);
+  std::cout << trap0 << std::endl;
+  trap0.beRepaired(100);
+  std::cout << trap0 << std::endl;
+
+  ClapTrap trap2;
+  std::cout << trap2 << std::endl;
+  ClapTrap trap3;
+  trap3.setName("Waz");
+  trap2 = trap3;
+  std::cout << trap2 << std::endl;
+  std::cout << trap3 << std::endl;
+
   return EXIT_SUCCESS;
 }
