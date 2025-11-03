@@ -1,32 +1,30 @@
-#include "Animal.hpp"
+#include "WrongCat.hpp"
 
 #include <iostream>
 
-static const std::string className = "Animal";
-static const std::string animalSound = "#@!";
+static const std::string className = "WrongCat";
+static const std::string animalSound = "Meowwwww";
 
-Animal::Animal() : type(className) {
+WrongCat::WrongCat() : WrongAnimal() {
+  this->setType(className);
   std::cout << className << " Default Constructor is called" << std::endl;
 }
 
-Animal::Animal(const Animal& other) : type(other.getType()) {
+WrongCat::WrongCat(const WrongCat& other) : WrongAnimal(other) {
   std::cout << className << " Copy Constructor is called" << std::endl;
 }
 
-Animal& Animal::operator=(const Animal& other) {
+WrongCat& WrongCat::operator=(const WrongCat& other) {
   std::cout << className << " Copy Assignemnt is called" << std::endl;
   if (this == &other) return *this;
   this->setType(other.getType());
   return *this;
 }
 
-Animal::~Animal() {
+WrongCat::~WrongCat() {
   std::cout << className << " Destructor is called" << std::endl;
 }
 
-std::string Animal::getType() const { return this->type; }
-void Animal::setType(const std::string& type) { this->type = type; }
-
-void Animal::makeSound() const {
+void WrongCat::makeSound() const {
   std::cout << this->getType() << " says " << animalSound << std::endl;
 }

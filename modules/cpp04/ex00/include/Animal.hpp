@@ -11,12 +11,12 @@ class Animal {
   virtual ~Animal();
 
   std::string getType() const;
-  void setType(const std::string& type);
 
   virtual void makeSound() const;
 
  protected:
   std::string type;
+  void setType(const std::string& type);
 };
 
 #endif

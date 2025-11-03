@@ -1,31 +1,28 @@
-#include "Animal.hpp"
+#include "Cat.hpp"
 
 #include <iostream>
 
-const std::string className = "Animal";
+static const std::string className = "Cat";
+static const std::string animalSound = "Meowwwww";
 
-Animal::Animal() : type(className) {
+Cat::Cat() : Animal() {
+  this->setType(className);
   std::cout << className << " Default Constructor is called" << std::endl;
 }
 
-Animal::Animal(const Animal& other) : type(other.getType()) {
-  std::cout << className << " Animal Copy Constructor is called" << std::endl;
+Cat::Cat(const Cat& other) : Animal(other) {
+  std::cout << className << " Copy Constructor is called" << std::endl;
 }
 
-Animal& Animal::operator=(const Animal& other) {
-  std::cout << className << " Animal Copy Assignemnt is called" << std::endl;
+Cat& Cat::operator=(const Cat& other) {
+  std::cout << className << " Copy Assignemnt is called" << std::endl;
   if (this == &other) return *this;
   this->setType(other.getType());
   return *this;
 }
 
-Animal::~Animal() {
-  std::cout << className << " Animal Destructor is called" << std::endl;
-}
+Cat::~Cat() { std::cout << className << " Destructor is called" << std::endl; }
 
-std::string Animal::getType() const { return this->type; }
-void Animal::setType(const std::string& type) { this->type = type; }
-
-void Animal::makeSound() const {
-  std::cout << this->getType() << " says #@!" << std::endl;
+void Cat::makeSound() const {
+  std::cout << this->getType() << " says " << animalSound << std::endl;
 }
