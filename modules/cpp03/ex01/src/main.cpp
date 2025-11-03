@@ -45,5 +45,8 @@ int main() {
   std::cout << trap2 << std::endl;
   std::cout << trap3 << std::endl;
 
+  ScavTrap trap4("Child");
+  ClapTrap *ptr = &trap4;
+  (void)ptr;
   return EXIT_SUCCESS;
 }
