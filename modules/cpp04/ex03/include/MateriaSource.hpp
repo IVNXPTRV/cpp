@@ -11,6 +11,9 @@ class MateriaSource : public IMateriaSource {
   int _templatesSize;
   AMateria* _templates[MAX_SLOTS];
 
+  void _deleteTemplates();
+  void _copyTemplates(const MateriaSource& src);
+
  public:
   MateriaSource();
   MateriaSource(const MateriaSource& other);

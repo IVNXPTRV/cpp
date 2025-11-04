@@ -8,9 +8,14 @@
 class Character : public ICharacter {
  private:
   std::string _name;
-  int _inventorySize;
   AMateria* _inventory[MAX_SLOTS];
+  int _unequipedSize;
   AMateria** _unequipedArray;  // NULL Terminated
+
+  void _deleteUnequipedArray();
+  void _deleteInventory();
+  void _copyInventory(const Character& src);
+  void _addToUnequipedArray(AMateria* item);
 
  public:
   Character();

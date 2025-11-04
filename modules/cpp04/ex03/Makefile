@@ -3,7 +3,7 @@ CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MF 
 RM := rm -rf
 
-NAME := animal 
+NAME := materia 
 
 INCLUDE_DIRS := \
 						./include/
@@ -12,12 +12,11 @@ INCLUDE := $(addprefix -I,$(INCLUDE_DIRS))
 
 SRC := \
 					./src/main.cpp \
-					./src/Animal.cpp \
-					./src/Dog.cpp \
-					./src/Cat.cpp \
-					./src/Brain.cpp \
-					./src/WrongCat.cpp \
-					./src/WrongAnimal.cpp \
+					./src/AMateria.cpp \
+					./src/Character.cpp \
+					./src/Cure.cpp \
+					./src/Ice.cpp \
+					./src/MateriaSource.cpp \
 
 OBJ := $(patsubst ./src/%.cpp,./obj/%.o,$(SRC))
 DEP := $(patsubst ./src/%.cpp,./dep/%.d,$(SRC))
@@ -49,6 +48,6 @@ re: fclean all
 test: leaks
 
 leaks:
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) 0 0 20 0 10 30 1 1
+	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) 
 
 -include $(DEP)
