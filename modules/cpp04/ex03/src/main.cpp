@@ -32,19 +32,24 @@ void testMateriaSource() {
 }
 
 void testCharacter() {
-  ICharacter* me = new Character("me");
-  ICharacter* bob = new Character("bob");
+  Character* me = new Character("me");
+  Character* bob = new Character("bob");
 
   me->equip(new Ice());
   me->use(0, *bob);
+  me->unequip(0);
+
+  Character foo(*me);
+
+  foo = *bob;
 
   std::cout << std::endl;
   delete me;
   delete bob;
 }
 
-int main() {
-  std::cout << std::endl << "--- Tests ---" << std::endl;
+void testSubject() {
+  std::cout << std::endl << "--- Subject Tests ---" << std::endl;
 
   IMateriaSource* src = new MateriaSource();
   src->learnMateria(new Ice());
@@ -66,8 +71,11 @@ int main() {
   delete bob;
   delete me;
   delete src;
+}
 
+int main() {
+  // testSubject();
   // testMateriaSource();
-  // testCharacter();
+  testCharacter();
   return EXIT_SUCCESS;
 }

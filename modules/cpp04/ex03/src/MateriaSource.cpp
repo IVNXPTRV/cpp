@@ -21,6 +21,9 @@ MateriaSource::MateriaSource(const MateriaSource& other) : IMateriaSource() {
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
   // std::cout << className << " Copy Assignemnt is called" << std::endl;
+  for (int i = 0; i < MAX_SLOTS; i++) {
+    this->_templates[i] = NULL;
+  }
   this->_templatesSize = other._templatesSize;
   this->_copyTemplates(other);
   return *this;

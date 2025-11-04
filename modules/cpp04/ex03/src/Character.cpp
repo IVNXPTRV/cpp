@@ -24,8 +24,13 @@ Character::Character(const Character& other) : ICharacter() {
 Character& Character::operator=(const Character& other) {
   // std::cout << className << " Copy Assignemnt is called" << std::endl;
   if (this == &other) return *this;
+
+  for (int i = 0; i < MAX_SLOTS; i++) {
+    this->_inventory[i] = NULL;
+  }
   this->_name = other.getName();
   this->_copyInventory(other);
+  this->_unequipedArray = NULL;
   return *this;
 }
 
