@@ -11,7 +11,7 @@ Cat::Cat() : Animal(), brain(new Brain) {
 }
 
 Cat::Cat(const Cat& other) : Animal(other), brain(new Brain) {
-  *(this->getBrain()) = *(other.getBrain());
+  *this->brain = *other.brain;
   std::cout << className << " Copy Constructor is called" << std::endl;
 }
 
@@ -20,7 +20,7 @@ Cat& Cat::operator=(const Cat& other) {
   if (this == &other) return *this;
   this->setType(other.getType());
   this->brain = new Brain;
-  // *(this->getBrain()) = *(other.getBrain());
+  *this->brain = *other.brain;
   return *this;
 }
 

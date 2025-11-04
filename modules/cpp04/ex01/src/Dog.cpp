@@ -11,6 +11,7 @@ Dog::Dog() : Animal(), brain(new Brain) {
 }
 
 Dog::Dog(const Dog& other) : Animal(other), brain(new Brain) {
+  *(this->brain) = *other.brain;
   std::cout << className << " Copy Constructor is called" << std::endl;
 }
 
@@ -19,6 +20,7 @@ Dog& Dog::operator=(const Dog& other) {
   if (this == &other) return *this;
   this->setType(other.getType());
   this->brain = new Brain;
+  *(this->brain) = *other.brain;
   return *this;
 }
 
