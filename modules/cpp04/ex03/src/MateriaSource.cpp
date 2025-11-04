@@ -14,16 +14,18 @@ MateriaSource::MateriaSource() : IMateriaSource(), _templatesSize(0) {
   std::cout << className << " Default Constructor is called" << std::endl;
 }
 
-MateriaSource::MateriaSource(const MateriaSource& other) : IMateriaSource() {
+MateriaSource::MateriaSource(const MateriaSource& other)
+    : IMateriaSource(), _templatesSize(other._templatesSize) {
   std::cout << className << " Copy Constructor is called" << std::endl;
-  *this = other;
-}
-
-MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
-  // std::cout << className << " Copy Assignemnt is called" << std::endl;
   for (int i = 0; i < MAX_SLOTS; i++) {
     this->_templates[i] = NULL;
   }
+  this->_copyTemplates(other);
+}
+
+MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
+  std::cout << className << " Copy Assignemnt is called" << std::endl;
+  if (this == &other) return *this;
   this->_templatesSize = other._templatesSize;
   this->_copyTemplates(other);
   return *this;
@@ -39,15 +41,16 @@ void MateriaSource::_copyTemplates(const MateriaSource& src) {
   for (int i = 0; i < MAX_SLOTS; i++) {
     if (src._templates[i] == NULL) {
       this->_templates[i] = NULL;
-      continue;
+    } else {
+      this->_templates[i] = src._templates[i]->clone();
     }
-    this->_templates[i] = src._templates[i]->clone();
   }
 }
 
 void MateriaSource::_deleteTemplates() {
   for (int i = 0; i < MAX_SLOTS; i++) {
     delete this->_templates[i];
+    this->_templates[i] = NULL;
   }
 }
 

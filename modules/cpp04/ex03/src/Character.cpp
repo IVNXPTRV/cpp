@@ -16,21 +16,24 @@ Character::Character()
   std::cout << className << " Default Constructor is called" << std::endl;
 }
 
-Character::Character(const Character& other) : ICharacter() {
+Character::Character(const Character& other)
+    : ICharacter(),
+      _name(other.getName()),
+      _unequipedSize(0),
+      _unequipedArray(NULL) {
   std::cout << className << " Copy Constructor is called" << std::endl;
-  *this = other;
-}
-
-Character& Character::operator=(const Character& other) {
-  // std::cout << className << " Copy Assignemnt is called" << std::endl;
-  if (this == &other) return *this;
-
   for (int i = 0; i < MAX_SLOTS; i++) {
     this->_inventory[i] = NULL;
   }
+  this->_copyInventory(other);
+}
+
+Character& Character::operator=(const Character& other) {
+  std::cout << className << " Copy Assignemnt is called" << std::endl;
+  if (this == &other) return *this;
   this->_name = other.getName();
   this->_copyInventory(other);
-  this->_unequipedArray = NULL;
+  this->_deleteUnequipedArray();
   return *this;
 }
 
@@ -89,14 +92,18 @@ void Character::_addToUnequipedArray(AMateria* item) {
 void Character::_copyInventory(const Character& src) {
   this->_deleteInventory();
   for (int i = 0; i < MAX_SLOTS; i++) {
-    if (src._inventory[i] == NULL) continue;
-    this->_inventory[i] = src._inventory[i]->clone();
+    if (src._inventory[i] == NULL) {
+      this->_inventory[i] = NULL;
+    } else {
+      this->_inventory[i] = src._inventory[i]->clone();
+    }
   }
 }
 
 void Character::_deleteInventory() {
   for (int i = 0; i < MAX_SLOTS; i++) {
     delete this->_inventory[i];
+    this->_inventory[i] = NULL;
   }
 }
 

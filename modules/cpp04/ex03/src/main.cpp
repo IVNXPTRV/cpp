@@ -8,14 +8,14 @@
 #include "MateriaSource.hpp"
 
 void testMateriaSource() {
-  IMateriaSource* src = new MateriaSource();
+  MateriaSource* src = new MateriaSource();
   src->learnMateria(new Ice());
   src->learnMateria(new Ice());
-  // src->learnMateria(new Ice());
-  // src->learnMateria(new Ice());
-  // src->learnMateria(new Ice());
-  // src->learnMateria(new Ice());
-  // src->learnMateria(new Ice());
+  src->learnMateria(new Ice());
+  src->learnMateria(new Ice());
+  src->learnMateria(new Ice());
+  src->learnMateria(new Ice());
+  src->learnMateria(new Ice());
 
   AMateria* tmp;
   tmp = src->createMateria("cure");
@@ -25,6 +25,9 @@ void testMateriaSource() {
   tmp1 = src->createMateria("cure");
   src->createMateria("#@!");
 
+  MateriaSource src1(*src);
+
+  src1 = *src;
   std::cout << std::endl;
   delete tmp;
   delete tmp1;
@@ -36,8 +39,16 @@ void testCharacter() {
   Character* bob = new Character("bob");
 
   me->equip(new Ice());
+  me->equip(new Ice());
+  me->equip(new Ice());
+  me->equip(new Ice());
+  me->equip(new Ice());
+  me->equip(new Ice());
+  me->equip(new Ice());
   me->use(0, *bob);
   me->unequip(0);
+  me->unequip(0);
+  me->unequip(10);
 
   Character foo(*me);
 
@@ -75,7 +86,7 @@ void testSubject() {
 
 int main() {
   // testSubject();
-  // testMateriaSource();
-  testCharacter();
+  testMateriaSource();
+  // testCharacter();
   return EXIT_SUCCESS;
 }
