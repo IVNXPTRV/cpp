@@ -27,6 +27,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
 }
 
 MateriaSource::~MateriaSource() {
+  this->_deleteTemplates();
   std::cout << className << " Destructor is called" << std::endl;
 }
 
@@ -55,13 +56,15 @@ void MateriaSource::learnMateria(AMateria* item) {
   }
   if (this->_templatesSize == MAX_SLOTS) {
     std::cout << "MateriaSource can't learn any more materia." << std::endl;
+    delete item;
     return;
   }
   for (int i = 0; i < MAX_SLOTS; i++) {
     if (this->_templates[i] == NULL) {
-      this->_templates[i] = item->clone();
+      this->_templates[i] = item;
       std::cout << "MateriaSource learned the " << item->getType()
                 << " materia recipe." << std::endl;
+      this->_templatesSize += 1;
       return;
     }
   }

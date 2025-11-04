@@ -45,7 +45,7 @@ fclean: clean
 
 re: fclean all
 
-test: leaks
+test: all leaks
 
 leaks:
 	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME) 

@@ -30,6 +30,8 @@ Character& Character::operator=(const Character& other) {
 }
 
 Character::~Character() {
+  this->_deleteUnequipedArray();
+  this->_deleteInventory();
   std::cout << className << " Destructor is called" << std::endl;
 }
 Character::Character(const std::string& name)
@@ -96,13 +98,14 @@ void Character::_deleteInventory() {
 void Character::equip(AMateria* m) {
   for (int i = 0; i < MAX_SLOTS; i++) {
     if (this->_inventory[i] == NULL) {
-      this->_inventory[i] = m->clone();
+      this->_inventory[i] = m;
       std::cout << this->_name << ": equiped " << m->getType() << std::endl;
       return;
     }
   }
   std::cout << this->_name << ": inventory is full. Cannot equip "
             << m->getType() << std::endl;
+  delete m;
 }
 
 void Character::use(int idx, ICharacter& target) {
@@ -118,3 +121,5 @@ void Character::use(int idx, ICharacter& target) {
   }
   this->_inventory[idx]->use(target);
 }
+
+std::string const& Character::getName() const { return this->_name; }

@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "ICharacter.hpp"
+
 static const std::string className = "AMateria";
 static const std::string materiaType = "<unknown>";
 
