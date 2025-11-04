@@ -1,0 +1,34 @@
+#include "Dog.hpp"
+
+#include <iostream>
+
+static const std::string className = "Dog";
+static const std::string animalSound = "Arf! Arf! Arf!";
+
+Dog::Dog() : Animal(), brain(new Brain) {
+  this->setType(className);
+  std::cout << className << " Default Constructor is called" << std::endl;
+}
+
+Dog::Dog(const Dog& other) : Animal(other), brain(new Brain) {
+  std::cout << className << " Copy Constructor is called" << std::endl;
+}
+
+Dog& Dog::operator=(const Dog& other) {
+  std::cout << className << " Copy Assignemnt is called" << std::endl;
+  if (this == &other) return *this;
+  this->setType(other.getType());
+  this->brain = new Brain;
+  return *this;
+}
+
+Dog::~Dog() {
+  delete this->getBrain();
+  std::cout << className << " Destructor is called" << std::endl;
+}
+
+void Dog::makeSound() const {
+  std::cout << this->getType() << " says " << animalSound << std::endl;
+}
+
+Brain* Dog::getBrain() const { return this->brain; };
