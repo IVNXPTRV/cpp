@@ -43,19 +43,8 @@ fclean: clean
 re: clean fclean all obj_dir dep_dir
 
 test:
-	@echo "expect: -----------------------------------"
-	@echo "SHHHHH... I THINK THE STUDENTS ARE ASLEEP..."
-	@echo "result: -----------------------------------"
-	@./megaphone "shhhhh... I think the students are asleep..."
-	@echo
-	@echo "expect: -----------------------------------"
-	@echo "DAMNIT  !  SORRY STUDENTS, I THOUGHT THIS THING WAS OFF."
-	@echo "result: -----------------------------------"
-	@./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
-	@echo
-	@echo "expect: -----------------------------------"
-	@echo "* LOUD AND UNBEARABLE FEEDBACK NOISE *"
-	@echo "result: -----------------------------------"
-	@./megaphone
+	@make
+	@echo ""
+	@./$(NAME)
 
-	-include $(DEP)
+-include $(DEP)

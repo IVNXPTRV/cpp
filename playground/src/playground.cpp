@@ -8,16 +8,13 @@
 #include <vector>
 
 int main(void) {
-  std::time_t time;
-  std::tm *timemark;
+  std::string str = "100001111";
+  std::string str1(str);
 
-  time = std::time(NULL);
-  timemark = std::localtime(&time);
-  std::cout << "[" << timemark->tm_year + 1900;
-  std::cout << std::setfill('0') << std::setw(2) << timemark->tm_mon + 1;
-  std::cout << std::setfill('0') << std::setw(2) << timemark->tm_mday << "_";
-  std::cout << std::setfill('0') << std::setw(2) << timemark->tm_hour;
-  std::cout << std::setfill('0') << std::setw(2) << timemark->tm_min;
-  std::cout << std::setfill('0') << std::setw(2) << timemark->tm_sec << "] ";
+  str.append(1, '0');
+  str1.erase(str1.length() - 2);
+  std::cout << str << std::endl;
+  std::cout << str1 << std::endl;
+
   return (EXIT_SUCCESS);
 }
