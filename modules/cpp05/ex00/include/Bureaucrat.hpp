@@ -17,7 +17,7 @@ class Bureaucrat {
   // Private Methods
  private:
   // Logic
-  void  confirmValidGrade(unsigned int grade);
+  void confirmValidGrade(unsigned int grade);
 
   // Exceptions
   class GradeTooHighException : public std::exception {

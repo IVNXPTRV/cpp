@@ -32,7 +32,8 @@ void test_dic_grade(std::string name, unsigned int grade) {
   b1.dicrementGrade();
   std::cout << b1 << std::endl;
 }
-void test(std::string name, unsigned int grade, void (*func)(std::string, unsigned int)){
+void test(std::string name, unsigned int grade,
+          void (*func)(std::string, unsigned int)) {
   try {
     func(name, grade);
   } catch (const std::exception &e) {
@@ -49,13 +50,13 @@ int main() {
   test("Baz", 100, test_paramed_constructor);
   test("Qux", 200, test_paramed_constructor);
   test("Corge", 10, test_paramed_constructor);
-  
-  
+
   test("Foo", 10, test_inc_grade);
   test("Bar", 22, test_dic_grade);
   test("Baz", 1, test_inc_grade);
   test("Qux", 44, test_inc_grade);
   test("Corge", 150, test_dic_grade);
-  
+  test("Foo", 3, test_inc_grade);
+
   return EXIT_SUCCESS;
 }
