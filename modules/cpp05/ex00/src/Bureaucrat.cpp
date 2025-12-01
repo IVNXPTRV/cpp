@@ -51,7 +51,7 @@ void Bureaucrat::incrementGrade() {
   std::cout << this->_name << " was promoted to grade " << this->_grade << "!"
             << std::endl;
 }
-void Bureaucrat::dicrementGrade() {
+void Bureaucrat::decrementGrade() {
   this->_grade += 1;
   confirmValidGrade(this->_grade);
   std::cout << this->_name << " was demoted to grade " << this->_grade << "!"

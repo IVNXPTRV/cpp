@@ -46,7 +46,7 @@ class Bureaucrat {
 
   // Logic
   void incrementGrade();
-  void dicrementGrade();
+  void decrementGrade();
 };
 
 // std::cout << overload

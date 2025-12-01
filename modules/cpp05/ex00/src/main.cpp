@@ -25,11 +25,11 @@ void test_inc_grade(std::string name, unsigned int grade) {
   std::cout << b1 << std::endl;
 }
 
-void test_dic_grade(std::string name, unsigned int grade) {
+void test_dec_grade(std::string name, unsigned int grade) {
   std::cout << "Grade dincrement test" << std::endl;
   Bureaucrat b1(name, grade);
   std::cout << b1 << std::endl;
-  b1.dicrementGrade();
+  b1.decrementGrade();
   std::cout << b1 << std::endl;
 }
 void test(std::string name, unsigned int grade,
@@ -52,10 +52,10 @@ int main() {
   test("Corge", 10, test_paramed_constructor);
 
   test("Foo", 10, test_inc_grade);
-  test("Bar", 22, test_dic_grade);
+  test("Bar", 22, test_dec_grade);
   test("Baz", 1, test_inc_grade);
   test("Qux", 44, test_inc_grade);
-  test("Corge", 150, test_dic_grade);
+  test("Corge", 150, test_dec_grade);
   test("Foo", 3, test_inc_grade);
 
   return EXIT_SUCCESS;
