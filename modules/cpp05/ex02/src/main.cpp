@@ -3,6 +3,8 @@
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
 void test_default_constructor(std::string name, unsigned int grade) {
@@ -54,5 +56,19 @@ int main() {
   test(b, f);
   b.signForm(f);
   test(b, f);
+
+  RobotomyRequestForm rf("Baz");
+  test(b, rf);
+  b.signForm(rf);
+  Bureaucrat b1("Qux", 1);
+  b1.signForm(rf);
+  test(b1, rf);
+
+  PresidentialPardonForm pf("Corge");
+  test(b, pf);
+  b.signForm(pf);
+  b1.signForm(pf);
+  test(b1, pf);
+
   return EXIT_SUCCESS;
 }

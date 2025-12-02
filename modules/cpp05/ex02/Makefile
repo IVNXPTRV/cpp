@@ -15,6 +15,8 @@ SRC := \
 					./src/Bureaucrat.cpp \
 					./src/AForm.cpp \
 					./src/ShrubberyCreationForm.cpp \
+					./src/RobotomyRequestForm.cpp \
+					./src/PresidentialPardonForm.cpp \
 
 OBJ := $(patsubst ./src/%.cpp,./obj/%.o,$(SRC))
 DEP := $(patsubst ./src/%.cpp,./dep/%.d,$(SRC))
@@ -37,11 +39,16 @@ dep_dir:
 clean:
 	$(RM) obj
 	$(RM) dep
+	$(RM) *_shrubbery
 
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+run: re
+	./$(NAME)
+	make fclean
 
 test: leaks
 
