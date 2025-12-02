@@ -3,7 +3,7 @@ CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MF 
 RM := rm -rf
 
-NAME := ex00 
+NAME := ex01 
 
 INCLUDE_DIRS := \
 						./include/
@@ -13,6 +13,7 @@ INCLUDE := $(addprefix -I,$(INCLUDE_DIRS))
 SRC := \
 					./src/main.cpp \
 					./src/Bureaucrat.cpp \
+					./src/Form.cpp \
 
 OBJ := $(patsubst ./src/%.cpp,./obj/%.o,$(SRC))
 DEP := $(patsubst ./src/%.cpp,./dep/%.d,$(SRC))

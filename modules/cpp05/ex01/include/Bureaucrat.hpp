@@ -3,6 +3,7 @@
 
 #include <string>
 
+class Form;
 class Bureaucrat {
   // Private Attributes
  private:
@@ -47,6 +48,7 @@ class Bureaucrat {
   // Logic
   void incrementGrade();
   void decrementGrade();
+  void signForm(Form &f);
 };
 
 // std::cout << overload

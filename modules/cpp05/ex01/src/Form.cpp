@@ -71,17 +71,14 @@ bool Form::isSigned() const { return this->_isSigned; }
 void Form::beSigned(Bureaucrat& b) {
   if (this->_gradeRequiredToSign < b.getGrade())
     throw(Form::GradeTooLowException());
-  if (this->_isSigned == true)
-    throw(Form::AlreadySignedException());
+  if (this->_isSigned == true) throw(Form::AlreadySignedException());
   this->_isSigned = true;
-  std::cout << b.getName() << " form signed by bureaucrat " << this->_name << std::endl;
 }
 
 std::ostream& operator<<(std::ostream& out, const Form& b) {
-  out << b.getName() << "form is " << (b.isSigned() ? "signed" : "unsigned")
+  out << b.getName() << " form is " << (b.isSigned() ? "signed" : "unsigned")
       << std::endl;
   out << "Required grade to sign: " << b.getGradeRequiredToSign() << std::endl;
-  out << "Required grade to execute: " << b.getGradeRequiredToExecute()
-      << std::endl;
-  return out << std::endl;
+  out << "Required grade to execute: " << b.getGradeRequiredToExecute();
+  return out;
 }
