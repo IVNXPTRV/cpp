@@ -2,6 +2,22 @@
 #define SCALARCONVERTER_HPP
 
 #include <string>
+#include <cstdlib>
+#include <limits>
+#include <iostream>
+#include <cctype>
+#include <cmath>
+#include <cerrno>
+
+# define DIGITS "0123456789"
+
+typedef enum
+{
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE,
+} t_type;
 
 class ScalarConverter {
   // Private Attributes
@@ -12,13 +28,6 @@ class ScalarConverter {
 
   // Private Methods
  private:
-  // Logic
-
-  // Exceptions
-
-  // Public Methods
- public:
-  // Constructors and Destructors
   ScalarConverter();
   ~ScalarConverter();
   ScalarConverter(const ScalarConverter& other);
@@ -26,6 +35,13 @@ class ScalarConverter {
 
   // Operator overloads
   ScalarConverter& operator=(const ScalarConverter& other);
+  // Logic
+
+  // Exceptions
+
+  // Public Methods
+ public:
+  // Constructors and Destructors
 
   // Getters and Setters
 

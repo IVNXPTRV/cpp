@@ -12,7 +12,7 @@ INCLUDE := $(addprefix -I,$(INCLUDE_DIRS))
 
 SRC := \
 					./src/main.cpp \
-					./src/Bureaucrat.cpp \
+					./src/ScalarConverter.cpp \
 
 OBJ := $(patsubst ./src/%.cpp,./obj/%.o,$(SRC))
 DEP := $(patsubst ./src/%.cpp,./dep/%.d,$(SRC))
@@ -40,6 +40,15 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+run: re
+	@echo "--- RUN ---"
+	@echo ""
+	@./$(NAME)
+	@echo ""
+	@echo "--- END ---"
+	@echo ""
+	@make fclean
 
 test: leaks
 
