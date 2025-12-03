@@ -26,7 +26,6 @@ class ScalarConverter {
 
   ~ScalarConverter();
   ScalarConverter(const ScalarConverter& other);
-  ScalarConverter(std::string name, unsigned int grade);
 
   // Operator overloads
   ScalarConverter& operator=(const ScalarConverter& other);
