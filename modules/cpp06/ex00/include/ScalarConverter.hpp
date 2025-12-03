@@ -1,34 +1,29 @@
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 
-#include <string>
-#include <cstdlib>
-#include <limits>
-#include <iostream>
 #include <cctype>
-#include <cmath>
 #include <cerrno>
+#include <cmath>
+#include <cstdlib>
+#include <string>
+#include <iostream>
 
-# define DIGITS "0123456789"
-
-typedef enum
-{
-	CHAR,
-	INT,
-	FLOAT,
-	DOUBLE,
+typedef enum {
+  CHAR,
+  INT,
+  FLOAT,
+  DOUBLE,
 } t_type;
 
 class ScalarConverter {
   // Private Attributes
  private:
-
   // Public Attributes
  public:
-
   // Private Methods
  private:
   ScalarConverter();
+
   ~ScalarConverter();
   ScalarConverter(const ScalarConverter& other);
   ScalarConverter(std::string name, unsigned int grade);
@@ -46,10 +41,7 @@ class ScalarConverter {
   // Getters and Setters
 
   // Logic
-  static void convert(const std::string &str);
+  static void convert(const std::string& str);
 };
-
-// std::cout << overload
-std::ostream& operator<<(std::ostream& out, const ScalarConverter& b);
 
 #endif

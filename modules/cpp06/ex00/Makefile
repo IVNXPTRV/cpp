@@ -3,7 +3,7 @@ CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -MMD -MF 
 RM := rm -rf
 
-NAME := ex00 
+NAME := convert 
 
 INCLUDE_DIRS := \
 						./include/
