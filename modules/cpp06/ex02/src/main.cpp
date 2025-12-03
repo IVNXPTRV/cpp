@@ -21,6 +21,6 @@ int main() {
   std::cout << "Wrong type test" << std::endl;
   p = NULL;
   identify(p);
-  identify(*p);
+  // identify(*p);
   return EXIT_SUCCESS;
 }
