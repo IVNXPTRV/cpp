@@ -35,7 +35,7 @@ Array<T> &Array<T>::operator=(const Array<T> &other) {
 
 template <typename T>
 T& Array<T>::operator[](const unsigned int &index) {
-  if (index > (this->_n - 1)) throw Array<T>::IndexOutOfBoundException();
+  if (index >= this->_n) throw Array<T>::IndexOutOfBoundException();
   return this->_items[index];
 }
 
