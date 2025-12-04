@@ -31,7 +31,7 @@ class Span {
   };
 
   unsigned int size() const;
-  const std::vector<int> getPayload() const;
+  const std::vector<int>& getPayload() const;
   void addNumber(const int n);
   int shortestSpan();
   int longestSpan();

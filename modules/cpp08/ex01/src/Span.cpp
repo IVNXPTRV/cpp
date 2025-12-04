@@ -60,13 +60,10 @@ const char* Span::RangeTooSmallException::what() const throw() {
 
 unsigned int Span::size() const { return this->N; }
 
-const std::vector<int> Span::getPayload() const { return this->_payload; }
+const std::vector<int>& Span::getPayload() const { return this->_payload; }
 
 std::ostream& operator<<(std::ostream& out, const Span& span) {
-  std::vector<int> vec;
-
-  vec = span.getPayload();
-  for (unsigned int i = 0; i < span.size(); i++) out << vec[i] << " ";
+  for (unsigned int i = 0; i < span.size(); i++) out << span.getPayload()[i] << " ";
   out << std::endl;
   return out;
 }

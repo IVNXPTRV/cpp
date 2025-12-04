@@ -50,5 +50,17 @@ int main() {
     }
      std::stack<int, std::list<int> > s(mstack);
   }
+  std::cout << std::endl;
+  {
+    MutantStack<int> mstack;
+    mstack.push(5);
+    mstack.push(4);
+    mstack.push(3);
+    mstack.push(2);
+    mstack.push(1);
+    for(MutantStack<int>::const_iterator it = mstack.begin(); it < mstack.end(); it++){
+      std::cout << *it << std::endl;
+    }
+  }
   return 0;
 }
