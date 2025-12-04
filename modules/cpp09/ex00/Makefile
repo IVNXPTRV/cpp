@@ -44,7 +44,7 @@ re: fclean all
 run: re
 	@echo "--- RUN ---"
 	@echo ""
-	@./$(NAME)
+	@./$(NAME) input.txt
 	@echo ""
 	@echo "--- END ---"
 	@echo ""

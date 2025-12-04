@@ -5,18 +5,17 @@
 #include <string>
 
 class BitcoinExchange {
- private:
-  std::map<std::string, float> _database;
-
  public:
-  const static std::string _databaseFilepath;
+  static std::map<std::string, std::string> database;
+  static std::map<std::string, std::string> input;
 
  private:
-  BitcoinExchange();
-  ~BitcoinExchange();
   BitcoinExchange(const BitcoinExchange& other);
   BitcoinExchange& operator=(const BitcoinExchange& other);
+  BitcoinExchange();
+  ~BitcoinExchange();
 
+ public:
   static void calculate(const std::string& filepath);
 
   // EXCEPTIONS
