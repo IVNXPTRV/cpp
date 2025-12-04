@@ -25,6 +25,28 @@ int main() {
 
     std::cout << std::endl;
   }
+  {
+    Span sp = Span(5);
+    sp.addNumber(0);
+    try {
+      std::cout << sp.shortestSpan() << std::endl;
+    } catch (const std::exception &e) {
+      std::cout << "Exception: " << e.what() << std::endl;
+    }
+
+    std::cout << std::endl;
+  }
+  {
+    Span sp = Span(1);
+    sp.addNumber(0);
+    try {
+      sp.addNumber(1);
+    } catch (const std::exception &e) {
+      std::cout << "Exception: " << e.what() << std::endl;
+    }
+
+    std::cout << std::endl;
+  }
   // SUBJECT TEST
   {
     Span sp = Span(5);
