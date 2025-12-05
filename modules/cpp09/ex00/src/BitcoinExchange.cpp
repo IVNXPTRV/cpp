@@ -68,6 +68,7 @@ static void readFile(std::ifstream& infile,
     split(line, delim, key, value);
     trim(key);
     trim(value);
+    // std::cout << key << " " << value << std::endl;
     storage[key] = value;
   }
 }
@@ -83,14 +84,20 @@ static void fillStorage(std::map<std::string, std::string>& storage,
     readFile(infile, storage, delim);
     closeFile(infile);
   } catch (const std::exception& e) {
+    closeFile(infile);
     std::cout << "Error: " << e.what() << std::endl;
     std::exit(EXIT_FAILURE);
   }
 }
 
 static void validatePair(const std::pair<std::string, std::string>& pair) {
-  if (pair.first.empty() || pair.second.empty())
-    throw "bad input => " + pair.first + " | " + pair.second;
+  std::string error = "bad input => ";
+  if (pair.first.empty() || pair.second.empty()) {
+    // std::cout << ("bad input => " + pair.first + " " + pair.second).c_str()
+    //           << std::endl;
+    // throw("bad input => " + pair.first + " | " + pair.second).c_str();
+    throw(error = (error + pair.first));
+  }
 }
 
 static void validateDate(const std::string& date) {
@@ -108,15 +115,16 @@ static void validateDate(const std::string& date) {
   mktime(&normalized);
   if (normalized.tm_year != old.tm_year || normalized.tm_mon != old.tm_mon ||
       normalized.tm_mday != old.tm_mday)
-    throw error;
+    throw error.c_str();
 }
 
 static void validateValue(const std::string& value) {
   char* endptr = NULL;
+  std::string error;
   const double num = std::strtod(value.c_str(), &endptr);
-  if (*endptr != '\0') throw "bad input => " + value;
-  if (num < 0) throw "not a positive number.";
-  if (num > 1000.0) throw "too large number";
+  if (*endptr != '\0') throw(error = ("bad input => " + value));
+  if (num < 0) throw error = "not a positive number.";
+  if (num > 1000.0) throw error = "too large a number.";
 }
 
 static bool isValid(const std::pair<std::string, std::string>& pair) {
@@ -125,7 +133,7 @@ static bool isValid(const std::pair<std::string, std::string>& pair) {
     validateDate(pair.first);
     validateValue(pair.second);
     return true;
-  } catch (const std::string& what) {
+  } catch (const std::string what) {
     std::cout << "Error: " << what << std::endl;
     return false;
   }
@@ -135,7 +143,6 @@ static const std::string findClosestDate(
     const std::string& date, std::map<std::string, std::string>& database) {
   std::map<std::string, std::string>::iterator current;
   std::map<std::string, std::string>::iterator previous;
-
   if (date < database.begin()->first) return "";
   if (date > database.rbegin()->first) return (database.rbegin()->second);
 
@@ -143,7 +150,9 @@ static const std::string findClosestDate(
   current = database.begin();
   current++;
   while (current != database.end()) {
-    if (current->first > date) return (previous->second);
+    if (current->first > date) {
+      return (previous->first);
+    }
     previous = current;
     ++current;
   }
@@ -152,22 +161,46 @@ static const std::string findClosestDate(
 
 static float getRate(const std::string& date,
                      std::map<std::string, std::string>& database) {
-  if (database.find(date) == database.end())
+  if (database.find(date) == database.end()) {
     return std::atof(database[findClosestDate(date, database)].c_str());
-  else
+  } else
     return std::atof(database[date].c_str());
 }
 
-// static void run(std::map<std::string, std::string>& input,
-//                 std::map<std::string, std::string>& database) {
-//   for (std::map<std::string, std::string>::iterator it = input.begin();
-//        it != input.end(); it++) {
-//     if (!isValid(*it)) continue;
-//     std::cout << it->first << " => " << it->second << " = "
-//               << std::atof(it->second.c_str()) * getRate(it->first, database)
-//               << std::endl;
-//   }
-// }
+static void processInput(std::ifstream& infile,
+                         std::map<std::string, std::string>& database) {
+  std::string key, value, line;
+  std::pair<std::string, std::string> pair;
+
+  std::getline(infile, line);  // skip first line
+  while (true) {
+    std::getline(infile, line);
+    if (infile.eof()) break;
+    split(line, '|', key, value);
+    trim(key);
+    trim(value);
+    pair.first = key;
+    pair.second = value;
+    if (!isValid(pair)) continue;
+    std::cout << pair.first << " => " << pair.second << " = "
+              << std::atof(pair.second.c_str()) * getRate(pair.first, database)
+              << std::endl;
+  }
+}
+
+static void run(const std::string inputfile,
+                std::map<std::string, std::string>& database) {
+  std::ifstream infile;
+  try {
+    openFile(infile, inputfile);
+    processInput(infile, database);
+    closeFile(infile);
+  } catch (const std::exception& e) {
+    closeFile(infile);
+    std::cout << "Error: " << e.what() << std::endl;
+    std::exit(EXIT_FAILURE);
+  }
+}
 
 void print(std::map<std::string, std::string>& input) {
   for (std::map<std::string, std::string>::iterator it = input.begin();
@@ -176,12 +209,6 @@ void print(std::map<std::string, std::string>& input) {
   }
 }
 void BitcoinExchange::calculate(const std::string& inputfile) {
-  // std::cout << databaseDefaultFilepath << std::endl;
-  // std::cout << inputfile << std::endl;
   fillStorage(BitcoinExchange::database, databaseDefaultFilepath, ',');
-  (void)inputfile;
-
-  fillStorage(BitcoinExchange::input, inputfile, '|');
-  print(BitcoinExchange::input);
-  // run(input, BitcoinExchange::database);
+  run(inputfile, BitcoinExchange::database);
 }
