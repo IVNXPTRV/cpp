@@ -68,7 +68,6 @@ static void readFile(std::ifstream& infile,
     split(line, delim, key, value);
     trim(key);
     trim(value);
-    // std::cout << key << " " << value << std::endl;
     storage[key] = value;
   }
 }
@@ -93,9 +92,6 @@ static void fillStorage(std::map<std::string, std::string>& storage,
 static void validatePair(const std::pair<std::string, std::string>& pair) {
   std::string error = "bad input => ";
   if (pair.first.empty() || pair.second.empty()) {
-    // std::cout << ("bad input => " + pair.first + " " + pair.second).c_str()
-    //           << std::endl;
-    // throw("bad input => " + pair.first + " | " + pair.second).c_str();
     throw(error = (error + pair.first));
   }
 }
@@ -115,7 +111,7 @@ static void validateDate(const std::string& date) {
   mktime(&normalized);
   if (normalized.tm_year != old.tm_year || normalized.tm_mon != old.tm_mon ||
       normalized.tm_mday != old.tm_mday)
-    throw error.c_str();
+    throw error;
 }
 
 static void validateValue(const std::string& value) {
