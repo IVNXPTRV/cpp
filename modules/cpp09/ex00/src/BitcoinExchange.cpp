@@ -11,7 +11,6 @@
 const std::string databaseDefaultFilepath = "data.csv";
 const std::string inputDefaultFilepath = "input.txt";
 std::map<std::string, std::string> BitcoinExchange::database;
-std::map<std::string, std::string> BitcoinExchange::input;
 
 BitcoinExchange::BitcoinExchange() {}
 BitcoinExchange::~BitcoinExchange() {}
@@ -91,8 +90,11 @@ static void fillStorage(std::map<std::string, std::string>& storage,
 
 static void validatePair(const std::pair<std::string, std::string>& pair) {
   std::string error = "bad input => ";
+  if (pair.first.empty() && pair.second.empty()) {
+    throw(error = ("empty line"));
+  }
   if (pair.first.empty() || pair.second.empty()) {
-    throw(error = (error + pair.first));
+    throw(error = (error + pair.first + " " + pair.second));
   }
 }
 
