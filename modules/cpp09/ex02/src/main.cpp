@@ -1,10 +1,12 @@
 
 #include <cstdlib>
+#include <deque>
+#include <vector>
 
-#include "RPN.hpp"
+#include "PmergeMe.hpp"
 
-int main(int argc, char **argv) {
-  if (argc != 2) return EXIT_FAILURE;
-  calculate(argv[1]);
+int main(const int argc, const char **argv) {
+  if (argc < 2) return EXIT_FAILURE;
+  sort<std::vector, int>(argv + 1);
   return EXIT_SUCCESS;
 }
