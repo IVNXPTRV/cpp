@@ -44,10 +44,9 @@ re: fclean all
 run: re
 	@echo "--- RUN ---"
 	@echo ""
-	./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +" 
-	./$(NAME) "7 7 * 7 -" 
-	./$(NAME) "1 2 * 2 / 2 * 2 4 - +" 
-	./$(NAME) "(1 + 1)" 
+	# ./$(NAME) 3 5 9 7 4 
+	# ./$(NAME) `shuf -i 1-100000 -n 3000 | tr "\n" " "` 
+	./$(NAME)  "-1" "2"
 	@echo ""
 	@echo "--- END ---"
 	@echo ""

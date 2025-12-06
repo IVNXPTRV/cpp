@@ -1,6 +1,6 @@
 #include "PmergeMe.hpp"
 
-inline void swap(int& a, int& b) {
+void swap(int& a, int& b) {
   int tmp = 0;
 
   tmp = a;
