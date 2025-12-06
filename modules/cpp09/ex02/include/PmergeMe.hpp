@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cmath>
 #include <ctime>
+#include <deque>
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -57,8 +58,6 @@ static void createPairs(Container<T>& nums,
     }
     loser > winner ? swap(loser, winner) : (void)NULL;
     pairs.push_back(std::pair<T, T>(loser, winner));
-    // std::cout << "A: " << pairs.back().first << " B: " << pairs.back().second
-    //           << std::endl;
   }
 }
 
@@ -119,7 +118,6 @@ static void mergeInsertionSort(Container<T>& nums) {
        it < pairs.end(); it++) {
     if (it->first != UNUSED) W.push_back(it->second);
   }
-  // std::cout << "EHRE" << std::endl;
   // recursion
   mergeInsertionSort(W);  // W becomes new nums
 
@@ -127,7 +125,6 @@ static void mergeInsertionSort(Container<T>& nums) {
   int oddElement = UNUSED;
   if (n % 2 != 0) oddElement = pairs.back().second;
   if (oddElement != UNUSED) {
-    // std::cout << oddElement << std::endl;
     binarySearchInsert(W, oddElement);
   }
   // handle Local Losers
@@ -135,20 +132,34 @@ static void mergeInsertionSort(Container<T>& nums) {
 
   // assign to previous coil to W current W
   nums = W;
-  // print(nums);
 }
 
+template <typename T>
+struct ContainerType {
+  static const char* name() { return "Unknown"; }
+};
+
+template <typename T>
+struct ContainerType<std::vector<T> > {
+  static const char* name() { return "std::vector"; }
+};
+
+template <typename T>
+struct ContainerType<std::deque<T> > {
+  static const char* name() { return "std::deque"; }
+};
+
 template <template <typename> class Container, typename T>
-void sort(const char** argv) {
+void sort(const char** argv, bool printOneTime) {
   Container<T> nums;
   std::clock_t start, end;
 
   parse(nums, argv);
-  print(nums);
+  if (printOneTime) print(nums);
   start = std::clock();
   mergeInsertionSort(nums);
-  print(nums);
   end = std::clock();
+  if (printOneTime) print(nums), printOneTime = true;
   std::cout << "time: " << end - start << std::endl;
 }
 #endif
