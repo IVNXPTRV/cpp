@@ -21,7 +21,7 @@ static void compute(std::stack<int> &stack, const char opr) {
       stack.push(first * second);
       break;
     case '/':
-      if (second == 0) throw "Error: division by zero";
+      if (first == 0) throw "Error: division by zero";
       stack.push(second / first);
       break;
   }
