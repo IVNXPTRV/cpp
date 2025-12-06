@@ -155,11 +155,14 @@ void sort(const char** argv, bool printOneTime) {
   std::clock_t start, end;
 
   parse(nums, argv);
-  if (printOneTime) print(nums);
+  if (printOneTime) std::cout << "Before: ", print(nums);
   start = std::clock();
   mergeInsertionSort(nums);
   end = std::clock();
-  if (printOneTime) print(nums), printOneTime = true;
-  std::cout << "time: " << end - start << std::endl;
+  if (printOneTime) std::cout << "After: ", print(nums), printOneTime = true;
+  std::cout << "Time to process a range of " << nums.size() << " elements with "
+            << ContainerType<Container<T> >::name() << ": "
+            << static_cast<double>(end - start) / CLOCKS_PER_SEC * 10e6 << " us"
+            << std::endl;
 }
 #endif

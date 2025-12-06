@@ -45,8 +45,16 @@ run: re
 	@echo "--- RUN ---"
 	@echo ""
 	./$(NAME) `shuf -i 1-100000 -n 3000 | tr "\n" " "` 
+	@echo ""
 	./$(NAME) 3 5 9 7 4 
+	@echo ""
 	./$(NAME)  "-1" "2"
+	@echo ""
+	./$(NAME)  "A" "2"
+	@echo ""
+	./$(NAME)  "1" "1"
+	@echo ""
+	./$(NAME)  
 	@echo ""
 	@echo "--- END ---"
 	@echo ""
